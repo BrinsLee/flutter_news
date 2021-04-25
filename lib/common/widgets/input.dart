@@ -28,7 +28,7 @@ Widget inputTextEdit({
         color: AppColors.primaryText,
         fontFamily: "Avenir",
         fontWeight: FontWeight.w400,
-        fontSize: duSetFontSzie(18),
+        fontSize: duSetFontSize(18),
       ),
       maxLines: 1,
       autocorrect: false,

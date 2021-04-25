@@ -1,4 +1,7 @@
+import 'dart:ui';
+
 import 'package:flutter/material.dart';
+import 'package:flutter_new/common/utils/screen.dart';
 import 'package:flutter_new/common/values/colors.dart';
 
 /// Created by lipeilin
@@ -13,7 +16,15 @@ Widget transparentAppBar({
     backgroundColor: Colors.transparent,
     elevation: 0,
     centerTitle: centerTitle,
-    title: Text(title,style: TextStyle(color: AppColors.primaryText),textAlign: TextAlign.center,),
+    title: Text(
+      title,
+      style: TextStyle(
+          color: AppColors.primaryText,
+          fontFamily: 'Montserrat',
+          fontSize: duSetFontSize(18.0),
+          fontWeight: FontWeight.w600),
+      textAlign: TextAlign.center,
+    ),
     leading: IconButton(
       icon: Icon(
         Icons.arrow_back_ios,

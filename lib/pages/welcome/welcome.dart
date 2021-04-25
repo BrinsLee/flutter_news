@@ -21,7 +21,7 @@ class _WelcomePageState extends State<WelcomePage> {
           color: AppColors.primaryText,
           fontFamily: "Montserrat",
           fontWeight: FontWeight.w600,
-          fontSize: duSetFontSzie(24),
+          fontSize: duSetFontSize(24),
         ),
       ),
     );
@@ -40,7 +40,7 @@ class _WelcomePageState extends State<WelcomePage> {
           color: AppColors.primaryText,
           fontFamily: "Avenir",
           fontWeight: FontWeight.normal,
-          fontSize: duSetFontSzie(16),
+          fontSize: duSetFontSize(16),
           height: 1.2,
         ),
       ),
@@ -73,7 +73,7 @@ class _WelcomePageState extends State<WelcomePage> {
                 color: AppColors.primaryText,
                 fontFamily: "Avenir",
                 fontWeight: FontWeight.normal,
-                fontSize: duSetFontSzie(16),
+                fontSize: duSetFontSize(16),
               ),
             ),
           )

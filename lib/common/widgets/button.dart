@@ -31,7 +31,7 @@ Widget btnFlatButtonWidget({
         style: TextStyle(
           color: fontColor,
           fontFamily: fontName,
-          fontSize: duSetFontSzie(fontSize),
+          fontSize: duSetFontSize(fontSize),
           height: 1,
         ),
       ),

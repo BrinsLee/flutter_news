@@ -16,6 +16,6 @@ Future<bool> toastInfo({
     timeInSecForIos: 1,
     backgroundColor: backgroundColor,
     textColor: textColor,
-    fontSize: duSetFontSzie(16),
+    fontSize: duSetFontSize(16),
   );
 }

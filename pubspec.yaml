@@ -100,4 +100,5 @@ flutter:
         - asset: assets/fonts/Montserrat-Medium.ttf
           weight: 500
     - family: Iconfont
+      fonts:
         - asset: assets/fonts/iconfont.ttf
