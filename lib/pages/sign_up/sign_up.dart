@@ -33,6 +33,7 @@ class _SignUpPageState extends State<SignUpPage> {
       toastInfo(msg: "密码不能小于6位");
       return;
     }
+    Navigator.pop(context);
   }
 
   /// 组件函数

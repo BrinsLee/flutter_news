@@ -34,7 +34,7 @@ class NewsPageListResponseEntity {
   int pagesize;
   int pages;
   int page;
-  List<Item> items;
+  List<NewsItem> items;
 
   factory NewsPageListResponseEntity.fromJson(Map<String, dynamic> json) =>
       NewsPageListResponseEntity(
@@ -42,7 +42,7 @@ class NewsPageListResponseEntity {
         pagesize: json["pagesize"],
         pages: json["pages"],
         page: json["page"],
-        items: List<Item>.from(json["items"].map((x) => Item.fromJson(x))),
+        items: List<NewsItem>.from(json["items"].map((x) => NewsItem.fromJson(x))),
       );
 
   Map<String, dynamic> toJson() => {
@@ -54,8 +54,8 @@ class NewsPageListResponseEntity {
       };
 }
 
-class Item {
-  Item({
+class NewsItem {
+  NewsItem({
     this.id,
     this.category,
     this.thumbnail,
@@ -73,7 +73,7 @@ class Item {
   String author;
   String url;
 
-  factory Item.fromJson(Map<String, dynamic> json) => Item(
+  factory NewsItem.fromJson(Map<String, dynamic> json) => NewsItem(
         id: json["id"],
         category: json["category"],
         thumbnail: json["thumbnail"],

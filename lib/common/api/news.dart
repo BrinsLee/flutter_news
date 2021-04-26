@@ -7,17 +7,30 @@ class NewsApi {
   static Future<NewsPageListResponseEntity> newsPageList({
     @required BuildContext context,
     NewsPageListRequestEntity params,
-    bool isFresh = false,
+    bool refresh = false,
     bool cacheDisk = false,
   }) async {
-    var response = await HttpUtil().get('/news', params: params);
+    var response = await HttpUtil().get(
+      '/news',
+      params: params?.toJson(),
+      refresh: refresh,
+      cacheDisk: cacheDisk,
+    );
     return NewsPageListResponseEntity.fromJson(response);
   }
 
   /// 推荐
-  static Future<NewsRecommendResponseEntity> newsRecommend(
-      {NewsRecommendRequestEntity params}) async {
-    var response = await HttpUtil().get('/news/recommend', params: params);
+  static Future<NewsRecommendResponseEntity> newsRecommend({
+    NewsRecommendRequestEntity params,
+    bool refresh = false,
+    bool cacheDisk = false,
+  }) async {
+    var response = await HttpUtil().get(
+      '/news/recommend',
+      params: params?.toJson(),
+      refresh: refresh,
+      cacheDisk: cacheDisk,
+    );
     return NewsRecommendResponseEntity.fromJson(response);
   }
 

@@ -1,9 +1,7 @@
-import 'dart:html';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_new/common/utils/iconfont.dart';
 import 'package:flutter_new/common/values/colors.dart';
-import 'package:flutter_new/common/widgets/appbar.dart';
+import 'package:flutter_new/common/widgets/widgets.dart';
 import 'package:flutter_new/pages/account/account.dart';
 import 'package:flutter_new/pages/bookmarks/bookmarks.dart';
 import 'package:flutter_new/pages/category/category.dart';
