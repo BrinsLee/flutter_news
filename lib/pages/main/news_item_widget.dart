@@ -7,7 +7,7 @@ import 'package:flutter_new/common/widgets/widgets.dart';
 
 Widget newsItem(NewsItem item) {
   return Container(
-    height: duSetHeight(161),
+    height: duSetHeight(180),
     padding: EdgeInsets.all(duSetWidth(20)),
     child: Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,

@@ -1,19 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_new/common/utils/utils.dart';
 import 'package:flutter_new/common/values/values.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-class WelcomePage extends StatefulWidget {
-  WelcomePage({Key key}) : super(key: key);
-  @override
-  _WelcomePageState createState() => _WelcomePageState();
-}
+class WelcomePage extends StatelessWidget {
+  const WelcomePage({Key key}) : super(key: key);
 
-class _WelcomePageState extends State<WelcomePage> {
   ///页面标题
   Widget _buildPageHeadTitle() {
     return Container(
-      margin: EdgeInsets.only(top: duSetHeight(65)),
+      margin: EdgeInsets.only(top: duSetHeight(60 + 44.0)), // 顶部系统栏 44px
       child: Text(
         "Features",
         textAlign: TextAlign.center,
@@ -83,7 +78,7 @@ class _WelcomePageState extends State<WelcomePage> {
   }
 
   ///开始按钮
-  Widget _buildStartButton() {
+  Widget _buildStartButton(BuildContext context) {
     return Container(
       width: duSetWidth(295),
       height: duSetHeight(44),
@@ -107,8 +102,6 @@ class _WelcomePageState extends State<WelcomePage> {
 
   @override
   Widget build(BuildContext context) {
-    ScreenUtil.init(context,
-        width: 375, height: 812 - 4 - 34, allowFontScaling: true);
     return Scaffold(
       body: Center(
           child: Column(
@@ -131,7 +124,7 @@ class _WelcomePageState extends State<WelcomePage> {
             40,
           ),
           Spacer(),
-          _buildStartButton(),
+          _buildStartButton(context),
         ],
       )),
     );

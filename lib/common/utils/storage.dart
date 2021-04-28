@@ -1,7 +1,5 @@
 import 'dart:convert';
 
-import 'package:flutter/material.dart';
-import 'package:flutter_new/common/values/values.dart';
 import 'package:localstorage/localstorage.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -29,9 +27,9 @@ class StorageUtil {
     return jsonString == null ? null : jsonDecode(jsonString);
   }
 
-  dynamic setJSON(String key, dynamic value) {
+  Future<bool> setJSON(String key, dynamic value) {
     String jsonStr = jsonEncode(value);
-    return _prefs.setString(key, value);
+    return _prefs.setString(key, jsonStr);
   }
 
   String getItem(String key) {
@@ -44,5 +42,14 @@ class StorageUtil {
 
   Future<bool> remove(String key) {
     return _prefs.remove(key);
+  }
+
+  Future<bool> setBool(String key, bool val) {
+    return _prefs.setBool(key, val);
+  }
+
+  bool getBool(String key) {
+    bool val = _prefs.getBool(key);
+    return val == null ? false : val;
   }
 }

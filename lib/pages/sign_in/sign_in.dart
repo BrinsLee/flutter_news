@@ -19,7 +19,7 @@ class _SignInPageState extends State<SignInPage> {
 
   ///// 事件函数
   _handleSignIn() async {
-/*    if (!duIsEmail(_emailController.value.text)) {
+    if (!duIsEmail(_emailController.value.text)) {
       toastInfo(msg: "请输入正确的邮箱");
       return;
     }
@@ -34,10 +34,10 @@ class _SignInPageState extends State<SignInPage> {
     );
 
     UserResponseEntity responseEntity =
-        await UserApi.login(params: requestEntity);
+        await UserApi.login(context: context, params: requestEntity);
     // 保存用户信息
     Global.saveProfile(responseEntity);
-    print(responseEntity);*/
+    print(responseEntity);
     Navigator.pushNamed(context, "/app");
   }
 

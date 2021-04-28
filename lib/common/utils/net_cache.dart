@@ -1,7 +1,6 @@
 import 'dart:collection';
 
 import 'package:dio/dio.dart';
-import 'package:flutter/material.dart';
 import 'package:flutter_new/common/utils/utils.dart';
 import 'package:flutter_new/common/values/cache.dart';
 
@@ -58,9 +57,11 @@ class NetCache extends Interceptor {
   @override
   Future onRequest(RequestOptions options) async {
     if (!CACHE_ENABLE) return options;
-
+    // refresh标记是否是"下拉刷新"
     bool refresh = options.extra["refresh"] == true;
+    // 是否磁盘缓存
     bool cacheDisk = options.extra["cacheDisk"] == true;
+    // 如果是下拉刷新，先删除相关缓存
     if (refresh) {
       if (options.extra["list"] == true) {
         //若是列表，则只要url中包含当前path的缓存全部删除（简单实现，并不精准）

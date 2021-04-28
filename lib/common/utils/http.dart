@@ -4,6 +4,7 @@ import 'package:dio_cookie_manager/dio_cookie_manager.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_new/common/utils/utils.dart';
 import 'package:flutter_new/common/values/values.dart';
+import 'package:flutter_new/common/widgets/toast.dart';
 
 import '../../global.dart';
 
@@ -56,20 +57,35 @@ class HttpUtil {
     dio.interceptors.add(CookieManager(cookieJar));
 
     // 添加拦截器
-    dio.interceptors
-        .add(InterceptorsWrapper(onRequest: (RequestOptions options) {
-      // print("请求之前");
-      // Loading.before(options.uri, '正在通讯...');
-      return options; //continue
-    }, onResponse: (Response response) {
-      // print("响应之前");
-      // Loading.complete(response.request.uri);
-      return response; // continue
-    }, onError: (DioError e) {
-      // print("错误之前");
-      // Loading.complete(e.request.uri);
-      return createErrorEntity(e); //continue
-    }));
+    dio.interceptors.add(InterceptorsWrapper(
+      onRequest: (RequestOptions options) {
+        // print("请求之前");
+        // Loading.before(options.uri, '正在通讯...');
+        return options; //continue
+      },
+      onResponse: (Response response) {
+        // print("响应之前");
+        // Loading.complete(response.request.uri);
+        return response; // continue
+      },
+      onError: (DioError e) {
+        // print("错误之前");
+        // Loading.complete(e.request.uri);
+        ErrorEntity eInfo = createErrorEntity(e); //continue
+        toastInfo(msg: eInfo.message);
+        // 错误交互处理
+        var context = e.request.extra["context"];
+        if (context != null) {
+          switch (eInfo.code) {
+            case 401: // 没有权限 重新登录
+              goLoginPage(context);
+              break;
+            default:
+          }
+        }
+        return eInfo;
+      },
+    ));
 
     // 加内存缓存
     dio.interceptors.add(NetCache());
@@ -187,9 +203,9 @@ class HttpUtil {
     var headers;
     String accessToken = Global.profile.accessToken;
     if (accessToken != null) {
-      headers = Options(headers: {
+      headers = {
         'Authorization': 'Bearer $accessToken',
-      });
+      };
     }
     return headers;
   }
@@ -201,6 +217,7 @@ class HttpUtil {
   /// cacheKey 缓存key
   Future get(
     String path, {
+    @required BuildContext context,
     dynamic params,
     Options options,
     bool refresh = false,
@@ -212,6 +229,7 @@ class HttpUtil {
     try {
       Options requestOptions = options ?? Options();
       requestOptions = requestOptions.merge(extra: {
+        "context": context,
         "refresh": refresh,
         "noCache": noCache,
         "list": list,
@@ -233,8 +251,16 @@ class HttpUtil {
   }
 
   /// restful post 操作
-  Future post(String path, {dynamic params, Options options}) async {
+  Future post(
+    String path, {
+    @required BuildContext context,
+    dynamic params,
+    Options options,
+  }) async {
     Options requestOptions = options ?? Options();
+    requestOptions = requestOptions.merge(extra: {
+      "context": context,
+    });
     Map<String, dynamic> _authorization = getAuthorizationHeader();
     if (_authorization != null) {
       requestOptions = requestOptions.merge(headers: _authorization);

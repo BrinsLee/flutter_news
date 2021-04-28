@@ -1,8 +1,12 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_easyrefresh/easy_refresh.dart';
 import 'package:flutter_new/common/api/apis.dart';
 import 'package:flutter_new/common/entity/entitys.dart';
 import 'package:flutter_new/common/utils/screen.dart';
+import 'package:flutter_new/common/utils/utils.dart';
+import 'package:flutter_new/common/values/values.dart';
 import 'package:flutter_new/pages/main/categories_widget.dart';
 import 'package:flutter_new/pages/main/channels_widget.dart';
 import 'package:flutter_new/pages/main/news_item_widget.dart';
@@ -30,13 +34,27 @@ class _MainPageState extends State<MainPage> {
   @override
   void initState() {
     super.initState();
+    _controller = EasyRefreshController();
     _loadAllData();
+    _loadLatestWithDiskCache();
+  }
+
+  // 如果有磁盘缓存，延迟3秒拉取更新档案
+  _loadLatestWithDiskCache() {
+    if (CACHE_ENABLE == true) {
+      var cacheData = StorageUtil().getJSON(STORAGE_INDEX_NEWS_CACHE_KEY);
+      if (cacheData != null) {
+        Timer(Duration(seconds: 3), () {
+          _controller.callRefresh();
+        });
+      }
+    }
   }
 
   @override
   Widget build(BuildContext context) {
     return EasyRefresh(
-      enableControlFinishLoad: true,
+      enableControlFinishRefresh: true,
       controller: _controller,
       header: ClassicalHeader(),
       onRefresh: () async {
@@ -66,10 +84,12 @@ class _MainPageState extends State<MainPage> {
 
   /// 加载数据
   _loadAllData() async {
-    _categories = await NewsApi.categories();
-    _channels = await NewsApi.channels();
-    _newsRecommend = await NewsApi.newsRecommend();
-    _newsPageList = await NewsApi.newsPageList(context: context);
+    _categories = await NewsApi.categories(context: context, cacheDisk: true);
+    _channels = await NewsApi.channels(context: context, cacheDisk: true);
+    _newsRecommend =
+        await NewsApi.newsRecommend(context: context, cacheDisk: true);
+    _newsPageList =
+        await NewsApi.newsPageList(context: context, cacheDisk: true);
     _selCategoryCode = _categories.first.code;
 
     if (mounted) {
@@ -80,11 +100,13 @@ class _MainPageState extends State<MainPage> {
   _loadNewsData(selCategoryCode, {bool refresh = false}) async {
     _selCategoryCode = selCategoryCode;
     _newsRecommend = await NewsApi.newsRecommend(
+      context: context,
       params: NewsRecommendRequestEntity(categoryCode: selCategoryCode),
       refresh: refresh,
       cacheDisk: true,
     );
     _newsPageList = await NewsApi.newsPageList(
+      context: context,
       params: NewsPageListRequestEntity(categoryCode: selCategoryCode),
       refresh: refresh,
       cacheDisk: true,

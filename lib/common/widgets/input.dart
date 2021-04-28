@@ -46,7 +46,7 @@ Widget inputEmailEdit({
   bool autofocus = false,
 }) {
   return Container(
-    height: duSetHeight(14),
+    height: duSetHeight(44),
     margin: EdgeInsets.only(top: duSetHeight(marginTop)),
     decoration: BoxDecoration(
       color: AppColors.primaryBackground,

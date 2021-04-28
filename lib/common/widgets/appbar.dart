@@ -27,11 +27,11 @@ Widget transparentAppBar({
     ),
     leading: IconButton(
       icon: Icon(
-        Icons.arrow_back_ios,
+        Icons.more_horiz,
         color: AppColors.primaryText,
       ),
       onPressed: () {
-        Navigator.pop(context);
+        // Navigator.pop(context);
       },
     ),
     actions: actions,
