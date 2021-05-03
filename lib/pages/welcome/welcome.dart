@@ -1,4 +1,7 @@
+import 'package:auto_route/auto_route.dart';
+import 'package:auto_route/auto_route_annotations.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_new/common/router/router.gr.dart';
 import 'package:flutter_new/common/utils/utils.dart';
 import 'package:flutter_new/common/values/values.dart';
 
@@ -91,10 +94,12 @@ class WelcomePage extends StatelessWidget {
           borderRadius: Radii.k6pxRadius,
         ),
         onPressed: () {
-          Navigator.pushNamed(
+          /*Navigator.pushNamed(
             context,
             "/sign-in",
-          );
+          );*/
+          ExtendedNavigator.root.push(Routes.signInPage);
+
         },
       ),
     );

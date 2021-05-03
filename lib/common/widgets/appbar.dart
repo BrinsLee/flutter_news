@@ -3,6 +3,7 @@ import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:flutter_new/common/utils/screen.dart';
 import 'package:flutter_new/common/values/colors.dart';
+import 'package:pk_skeleton/pk_skeleton.dart';
 
 /// Created by lipeilin
 /// on 2021/2/11
@@ -35,5 +36,14 @@ Widget transparentAppBar({
       },
     ),
     actions: actions,
+  );
+}
+
+/// 骨架屏-卡片
+Widget cardListSkeleton() {
+  return PKCardListSkeleton(
+    isCircularImage: true,
+    isBottomLinesActive: false,
+    length: 10,
   );
 }

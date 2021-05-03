@@ -7,6 +7,7 @@ import 'package:flutter_new/common/entity/entitys.dart';
 import 'package:flutter_new/common/utils/screen.dart';
 import 'package:flutter_new/common/utils/utils.dart';
 import 'package:flutter_new/common/values/values.dart';
+import 'package:flutter_new/common/widgets/widgets.dart';
 import 'package:flutter_new/pages/main/categories_widget.dart';
 import 'package:flutter_new/pages/main/channels_widget.dart';
 import 'package:flutter_new/pages/main/news_item_widget.dart';
@@ -41,7 +42,7 @@ class _MainPageState extends State<MainPage> {
 
   // 如果有磁盘缓存，延迟3秒拉取更新档案
   _loadLatestWithDiskCache() {
-    if (CACHE_ENABLE == true) {
+    if (CACHE_ENABLE) {
       var cacheData = StorageUtil().getJSON(STORAGE_INDEX_NEWS_CACHE_KEY);
       if (cacheData != null) {
         Timer(Duration(seconds: 3), () {
@@ -53,33 +54,35 @@ class _MainPageState extends State<MainPage> {
 
   @override
   Widget build(BuildContext context) {
-    return EasyRefresh(
-      enableControlFinishRefresh: true,
-      controller: _controller,
-      header: ClassicalHeader(),
-      onRefresh: () async {
-        await _loadNewsData(
-          _selCategoryCode,
-          refresh: true,
-        );
-        _controller.finishRefresh();
-      },
-      child: SingleChildScrollView(
-        child: Column(
-          children: [
-            _buildCategories(),
-            Divider(height: 1),
-            _buildRecommend(),
-            Divider(height: 1),
-            _buildChannels(),
-            Divider(height: 1),
-            _buildNewsList(),
-            Divider(height: 1),
-            _buildEmailSubscribe(),
-          ],
-        ),
-      ),
-    );
+    return _newsPageList == null
+        ? cardListSkeleton()
+        : EasyRefresh(
+            enableControlFinishRefresh: true,
+            controller: _controller,
+            header: ClassicalHeader(),
+            onRefresh: () async {
+              await _loadNewsData(
+                _selCategoryCode,
+                refresh: true,
+              );
+              _controller.finishRefresh();
+            },
+            child: SingleChildScrollView(
+              child: Column(
+                children: [
+                  _buildCategories(),
+                  Divider(height: 1),
+                  _buildRecommend(),
+                  Divider(height: 1),
+                  _buildChannels(),
+                  Divider(height: 1),
+                  _buildNewsList(),
+                  Divider(height: 1),
+                  _buildEmailSubscribe(),
+                ],
+              ),
+            ),
+          );
   }
 
   /// 加载数据

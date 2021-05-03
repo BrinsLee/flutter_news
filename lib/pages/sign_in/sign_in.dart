@@ -1,6 +1,8 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_new/common/api/apis.dart';
 import 'package:flutter_new/common/entity/entitys.dart';
+import 'package:flutter_new/common/router/router.gr.dart';
 import 'package:flutter_new/common/utils/utils.dart';
 import 'package:flutter_new/common/values/colors.dart';
 import 'package:flutter_new/common/values/radii.dart';
@@ -38,14 +40,16 @@ class _SignInPageState extends State<SignInPage> {
     // 保存用户信息
     Global.saveProfile(responseEntity);
     print(responseEntity);
-    Navigator.pushNamed(context, "/app");
+    // Navigator.pushNamed(context, "/app");
+    context.rootNavigator.push(Routes.applicationPage);
   }
 
   _handleSignUp() {
-    Navigator.pushNamed(
+    context.rootNavigator.push(Routes.signUpPage);
+    /*Navigator.pushNamed(
       context,
       "/sign-up",
-    );
+    );*/
   }
 
   ///// 组件函数

@@ -1,5 +1,7 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_new/common/entity/entitys.dart';
+import 'package:flutter_new/common/router/router.gr.dart';
 import 'package:flutter_new/common/utils/screen.dart';
 import 'package:flutter_new/common/utils/utils.dart';
 import 'package:flutter_new/common/values/colors.dart';
@@ -11,10 +13,17 @@ Widget recommendWidget(NewsRecommendResponseEntity newsRecommend) {
     child: Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        imageCached(
-          newsRecommend.thumbnail,
-          width: duSetWidth(335),
-          height: duSetHeight(290),
+        InkWell(
+          onTap: () {
+            ExtendedNavigator.root.push(Routes.detailPage,
+                arguments: DetailPageArguments(
+                    title: newsRecommend.title, url: newsRecommend.url));
+          },
+          child: imageCached(
+            newsRecommend.thumbnail,
+            width: duSetWidth(335),
+            height: duSetHeight(290),
+          ),
         ),
         Container(
           margin: EdgeInsets.only(top: duSetHeight(14)),
