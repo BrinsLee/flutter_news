@@ -16,6 +16,7 @@ import '../../pages/index/index.dart';
 import '../../pages/sign_in/sign_in.dart';
 import '../../pages/sign_up/sign_up.dart';
 import '../../pages/welcome/welcome.dart';
+import '../entity/entitys.dart';
 import 'auth_guard.dart';
 
 class Routes {
@@ -92,8 +93,7 @@ class AppRouter extends RouterBase {
       return MaterialPageRoute<dynamic>(
         builder: (context) => DetailPage(
           key: args.key,
-          title: args.title,
-          url: args.url,
+          item: args.item,
         ),
         settings: data,
       );
@@ -120,7 +120,6 @@ class ApplicationPageArguments {
 /// DetailPage arguments holder class
 class DetailPageArguments {
   final Key key;
-  final String title;
-  final String url;
-  DetailPageArguments({this.key, this.title, this.url});
+  final NewsItem item;
+  DetailPageArguments({this.key, this.item});
 }

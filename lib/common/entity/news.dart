@@ -117,6 +117,7 @@ class NewsRecommendRequestEntity {
 }
 
 /// 新闻推荐 response
+/*
 class NewsRecommendResponseEntity {
   String thumbnail;
   String title;
@@ -156,4 +157,4 @@ class NewsRecommendResponseEntity {
         "url": url,
         "id": id,
       };
-}
+}*/

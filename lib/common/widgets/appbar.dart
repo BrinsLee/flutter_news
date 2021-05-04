@@ -9,8 +9,9 @@ import 'package:pk_skeleton/pk_skeleton.dart';
 /// on 2021/2/11
 Widget transparentAppBar({
   @required BuildContext context,
-  String title,
+  @required String title,
   bool centerTitle,
+  Widget leading,
   List<Widget> actions,
 }) {
   return AppBar(
@@ -26,15 +27,17 @@ Widget transparentAppBar({
           fontWeight: FontWeight.w600),
       textAlign: TextAlign.center,
     ),
-    leading: IconButton(
-      icon: Icon(
-        Icons.more_horiz,
-        color: AppColors.primaryText,
-      ),
-      onPressed: () {
-        // Navigator.pop(context);
-      },
-    ),
+    leading: leading == null
+        ? IconButton(
+            icon: Icon(
+              Icons.more_horiz,
+              color: AppColors.primaryText,
+            ),
+            onPressed: () {
+              // Navigator.pop(context);
+            },
+          )
+        : leading,
     actions: actions,
   );
 }

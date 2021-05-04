@@ -7,7 +7,7 @@ import 'package:flutter_new/common/utils/utils.dart';
 import 'package:flutter_new/common/values/colors.dart';
 import 'package:flutter_new/common/widgets/image.dart';
 
-Widget recommendWidget(NewsRecommendResponseEntity newsRecommend) {
+Widget recommendWidget(NewsItem newsRecommend) {
   return Container(
     margin: EdgeInsets.all(duSetWidth(20)),
     child: Column(
@@ -17,7 +17,7 @@ Widget recommendWidget(NewsRecommendResponseEntity newsRecommend) {
           onTap: () {
             ExtendedNavigator.root.push(Routes.detailPage,
                 arguments: DetailPageArguments(
-                    title: newsRecommend.title, url: newsRecommend.url));
+                    item: newsRecommend));
           },
           child: imageCached(
             newsRecommend.thumbnail,
